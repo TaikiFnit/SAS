@@ -1,18 +1,16 @@
 Rails.application.routes.draw do
 
-  get 'messages/create'
-
-  get 'messages/update'
-
-  get 'messages/destroy'
 
   resources :users, only: [:show]
 
   devise_for :users
 
+  resources :courses
+
   resources :joins, only: [:index, :new, :create]
 
-  resources :courses
+  resources :messages, only: [:create, :update, destroy]
+
   root "courses#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
