@@ -1,14 +1,9 @@
 Rails.application.routes.draw do
 
-  get 'joins/new'
-
-  get 'joins/create'
-
-  get 'joins/index'
 
   devise_for :users
 
-  get 'courses/:id/join' => 'courses#join'
+  resources :joins, only: [:index, :new, :create]
 
   resources :courses
   root "courses#index"

@@ -1,2 +1,10 @@
-<h1>Joins#new</h1>
-<p>Find me in app/views/joins/new.html.erb</p>
+
+<%= form_for @join do |f| %>
+
+  <div class="form-group">
+    <%= f.number_field :course_id %>
+
+    <%= f.submit 'join' %>
+  </div>
+
+<% end %>

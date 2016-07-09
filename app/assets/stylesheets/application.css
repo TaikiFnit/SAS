@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+.comment-form {
+  width: 100%;
+  position: fixed;
+  bottom: 10px;
+}
+
