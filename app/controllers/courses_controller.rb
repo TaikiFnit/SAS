@@ -10,6 +10,8 @@ class CoursesController < ApplicationController
     # TODO: そのユーザーのperrmissionを検査(そのcourseに属しているか調査)
 
     @course = Course.find(params[:id])
+
+    @message = Message.new
   end
 
   def new

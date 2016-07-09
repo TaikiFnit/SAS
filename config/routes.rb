@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'messages/create'
+
+  get 'messages/update'
+
+  get 'messages/destroy'
+
   resources :users, only: [:show]
 
   devise_for :users
