@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'joins/new'
+
+  get 'joins/create'
+
+  get 'joins/index'
+
   devise_for :users
 
   get 'courses/:id/join' => 'courses#join'
