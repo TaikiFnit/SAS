@@ -12,6 +12,7 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
 
     @message = Message.new
+    @messages = Message.where(course_id: params[:id])
   end
 
   def new

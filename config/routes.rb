@@ -1,15 +1,13 @@
 Rails.application.routes.draw do
 
-
-  resources :users, only: [:show]
-
   devise_for :users
 
+  resources :users, only: [:show]
   resources :courses
 
   resources :joins, only: [:index, :new, :create]
 
-  resources :messages, only: [:create, :update, destroy]
+  resources :messages, only: [:create, :update, :destroy]
 
   root "courses#index"
 
