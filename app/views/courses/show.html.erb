@@ -9,10 +9,8 @@ main view
   <div class="col-sm-2" style="border:1px solid #eee;">
     <h3>Courses</h3>
     <ul>
-      <% # 後ほどアソシエーションを使ったものに変更 %>
-      <% current_user.user_courses.each do |course| %>
-        <% f = Course.find(course.course_id) %>
-        <li><%= link_to f.name, f %></li>
+      <% current_user.courses.each do |course| %>
+        <li><%= link_to course.name, course %></li>
       <% end %>
     </ul>
   </div>
@@ -32,8 +30,31 @@ main view
           <h4 class="media-heading"><%= message.user.name %></h4>
           <%= simple_format message.body %>
           <small><%= link_to '削除', message_path(message.id), method: :delete %></small>
+          <small id="reply-button" data-id="<%= message.id %>">返信</small>
         </div>
       </div>
+
+      <% message.replies.each do |reply| %>
+
+        <li><%= reply.user.name %> : <%= reply.body %> <small><%= link_to '削除', reply_path(reply.id), method: :delete %></small></li>
+
+      <% end %>
+
+      <div class="media" id="reply<%= message.id %>">
+        <div class="media-left">
+          <img class="media-object" src="<%= current_user.image_url %>" alt="current_user.name" style="width: 50px; height: 50px;">
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading"><%= current_user.name %></h4>
+          <%= form_for(@reply, url: { controller: :replies, action: :create}) do |f| %>
+            <%= f.text_area :body %>
+            <%= f.text_field :message_id, type: 'hidden', value: message.id %>
+
+            <%= f.submit "返信" %>
+          <% end %>
+        </div>
+      </div>
+
 
     <% end %>
   </div>
@@ -41,10 +62,8 @@ main view
   <div class="col-sm-2 col-sm-offset-1" style="border:1px solid #eee;">
     <h3>members</h3>
     <ul>
-      <% # 後ほどアソシエーションを使ったものに変更 %>
-      <%  UserCourse.where(course_id: @course.id).each do |data| %>
-        <% f = User.where(id: data.user_id)[0] %>
-        <li><%= link_to f.name, f %></li>
+      <% @course.users.each do |user| %>
+        <li><%= link_to user.name, user %></li>
       <% end %>
     </ul>
   </div>
@@ -57,3 +76,4 @@ main view
     <%= f.submit "Send!" %>
   <% end %>
 </div>
+

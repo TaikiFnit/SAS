@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   devise_for :users
 
   resources :users, only: [:show]
@@ -8,6 +9,7 @@ Rails.application.routes.draw do
   resources :joins, only: [:index, :new, :create]
 
   resources :messages, only: [:create, :update, :destroy]
+  resources :replies, only: [:create, :update, :destroy]
 
   root "courses#index"
 

@@ -11,6 +11,7 @@ class CoursesController < ApplicationController
 
     @course = Course.find(params[:id])
 
+    @reply = Reply.new
     @message = Message.new
     @messages = Message.where(course_id: params[:id])
   end
@@ -28,7 +29,6 @@ class CoursesController < ApplicationController
 
       redirect_to @course
     end
-
   end
 
   def edit
