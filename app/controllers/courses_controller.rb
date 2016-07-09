@@ -32,9 +32,18 @@ class CoursesController < ApplicationController
   end
 
   def edit
+    @course = Course.find(params[:id])
   end
 
   def update
+    @course = Course.find(params[:id])
+
+    if @course.update(course_params) then
+
+      UserCourse.create(user_id: current_user.id, course_id: @course.id)
+
+      redirect_to @course
+    end
   end
 
   def destroy

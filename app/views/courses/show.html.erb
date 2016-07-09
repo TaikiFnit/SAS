@@ -1,7 +1,7 @@
 
 <div class="row" style="text-align: center; height: 200px; background: #ddd; line-height: 200px;">
 
-main view
+<object data="<%= @course.resume %>"></object>
 
 </div>
 
@@ -54,8 +54,6 @@ main view
           <% end %>
         </div>
       </div>
-
-
     <% end %>
   </div>
 
@@ -77,3 +75,8 @@ main view
   <% end %>
 </div>
 
+<script>
+$.get('http://qiita.com/sparta-hachiman/private/ee5cfe3a8e9dab4cba7f', function(data) {
+  console.log(data);
+});
+</script>
