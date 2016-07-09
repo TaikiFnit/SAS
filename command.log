@@ -1,0 +1,22 @@
+1730  cd sparta_201606/
+1732  cd spartaAssistSystem/
+1739  bundle install
+1740  rails g devise:install
+1741  rails g devise User
+1742  rake db:migrate
+1744  rails g model courses name:string permission:boolean resume:string
+1745  rails g devise:views
+1746  rails g migration AddNameAndRoleAndImageUrlToUsers name:string role:integer image_url:string
+1747  rake db:migrate
+1748  rake db:migrate:status
+1762  git add .
+1755  git commit -m "install devise and generate model:users, courses"
+1756  rails g model UserCourse user_id:integer course_id:integer
+1757  rake db:migrate
+1762  git add .
+1760  git commit -m "add 中間テーブル"
+1762  git add .
+1763  git commit -m "define association"
+1764  rails g controller courses index show new create edit update destroy
+1765  git add .
+1766  git commit -m "generate course controller"
