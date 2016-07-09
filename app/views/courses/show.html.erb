@@ -27,7 +27,7 @@ main view
       <% # 後ほどアソシエーションを使ったものに変更 %>
       <%  UserCourse.where(course_id: @course.id).each do |data| %>
         <% f = User.where(id: data.user_id)[0] %>
-        <li><%= f.name %></li>
+        <li><%= link_to f.name, f %></li>
       <% end %>
     </ul>
   </div>

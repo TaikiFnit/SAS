@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160709040923) do
+ActiveRecord::Schema.define(version: 20160709062603) do
 
   create_table "courses", force: :cascade do |t|
     t.string   "name"
@@ -27,6 +27,30 @@ ActiveRecord::Schema.define(version: 20160709040923) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "messages", force: :cascade do |t|
+    t.string   "body"
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.boolean  "attr"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "messages", ["course_id"], name: "index_messages_on_course_id"
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id"
+
+  create_table "replies", force: :cascade do |t|
+    t.string   "body"
+    t.integer  "user_id"
+    t.integer  "message_id"
+    t.integer  "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "replies", ["message_id"], name: "index_replies_on_message_id"
+  add_index "replies", ["user_id"], name: "index_replies_on_user_id"
 
   create_table "user_courses", force: :cascade do |t|
     t.integer  "user_id"
