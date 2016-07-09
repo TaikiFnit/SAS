@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users, only: [:show]
+
+  get 'courses/:id/resume' => 'courses#resume'
   resources :courses
 
   resources :joins, only: [:index, :new, :create]

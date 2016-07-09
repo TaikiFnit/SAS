@@ -1,9 +1,11 @@
 class JoinsController < ApplicationController
+
   def index
   end
 
   def new
     @join = Join.new
+    @courses = Course.all
   end
 
   def create
