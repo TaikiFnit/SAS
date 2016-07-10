@@ -5,8 +5,6 @@ class CoursesController < ApplicationController
   # require 'net/https'
   # require 'uri'
 
-  before_action :authenticate_user!
-
   def resume
 
     @course = Course.find(params[:id])
@@ -34,6 +32,13 @@ class CoursesController < ApplicationController
     @reply = Reply.new
     @message = Message.new
     @messages = Message.where(course_id: params[:id])
+    @votes = []
+
+    @messages.each do |message|
+      @votes[message.id] = []
+      @votes[message.id][0] = Reply.where(['message_id = ? and value = ?', message.id, 0])
+      @votes[message.id][1] = Reply.where(['message_id = ? and value = ?', message.id, 1])
+    end
   end
 
   def new

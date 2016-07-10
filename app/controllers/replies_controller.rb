@@ -1,4 +1,5 @@
 class RepliesController < ApplicationController
+
   def create
     data = reply_params
     data[:user_id] = current_user.id

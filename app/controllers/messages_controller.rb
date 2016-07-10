@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+
   def create
     data = message_params
     data[:user_id] = current_user.id

@@ -31,13 +31,33 @@
           <%= simple_format message.body %>
           <small><%= link_to '削除', message_path(message.id), method: :delete %></small>
           <small id="reply-button" data-id="<%= message.id %>">返信</small>
+          <% if message.attr then %>
+            <h5>Results</h5>
+
+
+          <li>Yes : <%= @votes[message.id][1].count %></li>
+          <li>No : <%= @votes[message.id][0].count %></li>
+          <% end %>
         </div>
       </div>
 
+      <% # 選択肢がある場合(attr == true)の処理 %>
+      <% if message.attr then %>
+        <%= form_for(@reply, url: { controller: :replies, action: :create}) do |f| %>
+
+            <%= f.text_field :message_id, type: 'hidden', value: message.id %>
+
+            <%= f.radio_button :value, '0' %>
+            <%= f.radio_button :value, '1' %>
+
+            <%= f.submit "返信" %>
+        <% end %>
+      <% end %>
+
       <% message.replies.each do |reply| %>
-
-        <li><%= reply.user.name %> : <%= reply.body %> <small><%= link_to '削除', reply_path(reply.id), method: :delete %></small></li>
-
+        <% if !reply.value %>
+          <li><%= reply.user.name %> : <%= reply.body %> <small><%= link_to '削除', reply_path(reply.id), method: :delete %></small></li>
+        <% end %>
       <% end %>
 
       <div class="media" id="reply<%= message.id %>">
@@ -70,6 +90,7 @@
 <div class="comment-form">
   <%= form_for(@message, url: { controller: :messages, action: :create}) do |f|  %>
     <%= f.text_field :body %>
+    <%= f.check_box 'attr' %>
     <%= f.text_field :course_id, value: @course.id, type: 'hidden' %>
     <%= f.submit "Send!" %>
   <% end %>
