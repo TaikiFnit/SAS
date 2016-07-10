@@ -3,7 +3,11 @@
     <%= form_for(Join.new, { controller: :joins, action: :create}) do |f| %>
 
       <div class="form-group">
-        <%= f.number_field :course_id, class: 'form-control' %>
+        <ul class="list-group">
+        <% Course.all.each do |course| %>
+          <li class="list-group-item"><%= f.radio_button(:course_id, course.id) %> : <%= course.name %></li>
+        <% end %>
+        </ul>
       </div>
 
       <div class="form-group">

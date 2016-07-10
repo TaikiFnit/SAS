@@ -15,7 +15,10 @@ class JoinsController < ApplicationController
     @join = Join.new(data)
     @join.save
 
-    redirect_to root_path
+    @user_course = UserCourse.new(data)
+    @user_course.save
+
+    redirect_to course_path(data[:course_id])
   end
 
   private
