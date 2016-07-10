@@ -28,6 +28,12 @@ form  .btn {
   width: 100%;
 }
 
+.wrap {
+  margin-bottom: 120px;
+}
+
+
+
 section.devise.devise-index h2 {
   text-align: center;
   margin-bottom: 80px;
@@ -39,6 +45,10 @@ section.devise .panel-body {
 
 .form-group {
   margin-bottom: 60px !important;
+}
+
+.course-top{
+  margin-bottom: 60px;
 }
 
 section.course-index {
@@ -60,6 +70,18 @@ section.course-index h3 {
 .course-message h4.media-heading {
   font-size: 18px;
   color: #2196f3
+}
+
+.reply-message h4.media-heading{
+  font-size: 16px;
+}
+
+.reply-form {
+  display: none;
+}
+
+.reply-message p{
+  margin-bottom: 0;
 }
 
 div.media.course-message, div.media.course-message .media-body {
@@ -88,4 +110,17 @@ div.media.course-message, div.media.course-message .media-body {
 
 #toggle-button > div {
   margin: 5px;
+}
+
+ul.dropdown-menu  p {
+  display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.846;
+    color: #666666;
+    white-space: nowrap;
+}
+
+ul.dropdown-menu  p:hover {
 }

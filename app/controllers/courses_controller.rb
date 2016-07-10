@@ -38,6 +38,8 @@ class CoursesController < ApplicationController
       @votes[message.id] = []
       @votes[message.id][0] = Reply.where(['message_id = ? and value = ?', message.id, 0])
       @votes[message.id][1] = Reply.where(['message_id = ? and value = ?', message.id, 1])
+
+      @reply_id = params[:reply]
     end
   end
 

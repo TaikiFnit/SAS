@@ -29,6 +29,7 @@ gem 'twitter-bootswatch-rails-helpers'
 gem 'execjs'
 gem 'less-rails'
 gem 'therubyracer'
+gem "chartkick"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

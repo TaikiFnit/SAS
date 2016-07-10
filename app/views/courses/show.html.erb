@@ -1,5 +1,5 @@
 
-<div class="row" style="text-align: center; height: 200px; background: #ddd; line-height: 200px;">
+<div class="row course-top" style="text-align: center; height: 200px; background: #ddd; line-height: 200px;">
 
 <object data="/courses/<%= @course.id %>/resume" style="width: 100%; height: 100%;"></object>
 
@@ -26,15 +26,15 @@
           <div class="media-body">
             <div class="row">
               <div class="col-sm-11">
-                <a href="/users/<%= message.user_id %>">
-                <h4 class="media-heading"><%= message.user.name %></h4>
-                </a>
+
+                <h4 class="media-heading"><a href="/users/<%= message.user_id %>"><%= message.user.name %></a></h4>
+
               </div>
               <div class="col-sm-1">
                   <i class="glyphicon glyphicon-option-vertical dropdown-toggle" id="messageMenu<%= message.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></i>
 
                   <ul class="dropdown-menu" aria-labelledby="messageMenu<%= message.id %>">
-                    <li id="reply-button" data-id="<%= message.id %>"><a href="#">返信</a></li>
+                    <li class="reply-button" data-id="<%= message.id %>"><p>返信</p></li>
                     <li role="separator" class="divider"></li>
                     <li><%= link_to '削除', message_path(message.id), method: :delete %></li>
                   </ul>
@@ -48,38 +48,90 @@
                 <li>No : <%= @votes[message.id][0].count %></li>
               </ul>
             <% end %>
+
           </div>
           </div>
 
           <% # 選択肢がある場合(attr == true)の処理 %>
           <% if message.attr then %>
             <%= form_for(@reply, url: { controller: :replies, action: :create}) do |f| %>
+              <div>
               <%= f.text_field :message_id, type: 'hidden', value: message.id %>
-              <%= f.radio_button :value, '0' %>
-              <%= f.radio_button :value, '1' %>
-              <%= f.submit "返信" %>
+              Yes : <%= f.radio_button :value, '1' %>
+              No : <%= f.radio_button :value, '0' %>
+              <%= f.submit "投票", class: "btn btn-primary btn-xs" %>
+              </div>
             <% end %>
           <% end %>
 
           <% message.replies.each do |reply| %>
             <% if !reply.value %>
-              <li><%= reply.user.name %> : <%= reply.body %> <small><%= link_to '削除', reply_path(reply.id), method: :delete %></small></li>
+
+                <!-- 返信  -->
+
+                <div class="media course-message reply-message" style="margin-left: 60px;border: 1px solid #ddd;">
+                    <div class="media-left">
+                      <a href="/users/<%= reply.user_id %>">
+                        <img class="media-object" src="<%= reply.user.image_url %>" alt="reply.name" style="width: 30px; height: 30px;">
+                     </a>
+                  </div>
+                  <div class="media-body">
+                    <div class="row">
+                      <div class="col-sm-11">
+
+                        <h4 class="media-heading"><a href="/users/<%= reply.user_id %>"><%= reply.user.name %></a></h4>
+                      </div>
+                      <div class="col-sm-1">
+                          <i class="glyphicon glyphicon-option-vertical dropdown-toggle" id="replyMenu<%= reply.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></i>
+
+                          <ul class="dropdown-menu" aria-labelledby="replyMenu<%= reply.id %>">
+                            <li><%= link_to '削除', reply_path(reply.id), method: :delete %></li>
+                          </ul>
+                      </div>
+                    </div>
+                    <%= simple_format reply.body %>
+                  </div>
+                  </div>
+
+                <!-- end  返信  -->
+
             <% end %>
           <% end %>
 
-          <div class="media" id="reply<%= message.id %>">
-            <div class="media-left">
-              <img class="media-object" src="<%= current_user.image_url %>" alt="current_user.name" style="width: 50px; height: 50px;">
-              </div>
-              <div class="media-body">
-                <h4 class="media-heading"><%= current_user.name %></h4>
-                <%= form_for(@reply, url: { controller: :replies, action: :create}) do |f| %>
-                  <%= f.text_area :body %>
-                  <%= f.text_field :message_id, type: 'hidden', value: message.id %>
-                  <%= f.submit "返信" %>
-                <% end %>
-              </div>
-             </div>
+          <!-- Send Reply Form -->
+
+                <div class="media course-message reply-message reply-form" style="margin-left: 60px;border: 1px solid #ddd;" id="reply-form<%= message.id %>">
+                    <div class="media-left">
+                      <a href="/users/<%= current_user.id %>">
+                        <img class="media-object" src="<%= current_user.image_url %>" alt="<%=current_user.name%>" style="width: 30px; height: 30px;">
+                     </a>
+                  </div>
+                  <div class="media-body">
+                    <div class="row">
+                      <div class="col-sm-11">
+
+                        <h4 class="media-heading"><a href="/users/<%= current_user.id %>"><%= current_user.name %></a></h4>
+                      </div>
+
+                       <div class="col-sm-1">
+                          <i class="glyphicon glyphicon-remove" id="remove_button"></i>
+                      </div>
+
+                    </div>
+
+                    <%= form_for(@reply, url: { controller: :replies, action: :create}) do |f| %>
+                      <%= f.text_area :body, class: 'form-control', style: 'border: 1px solid #ddd;' %>
+                      <%= f.text_field :message_id, type: 'hidden', value: message.id %>
+                      <%= f.submit "返信", class: 'btn btn-primary btn-xs' %>
+                    <% end %>
+
+
+                  </div>
+                  </div>
+
+
+          <!-- End Send reply  -->
+
          <% end %>
       </div><!-- end panel-body -->
     </div><!-- end panel -->
@@ -122,4 +174,14 @@
   $("[name='message[attr]']").bootstrapSwitch();
   $("[name='message[attr]']").bootstrapSwitch('onText', 'Vote!');
   $("[name='message[attr]']").bootstrapSwitch('offText', 'Plain');
+
+  $(function() {
+    $('.reply-button').click(function() {
+      console.log('fnit');
+      id = $(this).data('id');
+
+      $('#reply-form' + id).show();
+    })
+  })
+
 </script>
