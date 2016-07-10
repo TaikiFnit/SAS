@@ -1,0 +1,47 @@
+current directory: /home/taikifnit/sparta_201606/spartaAssistSystem/vendor/bundle/ruby/2.3.0/gems/therubyracer-0.12.2/ext/v8
+/home/taikifnit/.rbenv/versions/2.3.0/bin/ruby -r ./siteconf20160710-18102-m013sg.rb extconf.rb
+checking for main() in -lpthread... yes
+creating Makefile
+
+To see why this extension failed to compile, please check the mkmf.log which can be found here:
+
+  /home/taikifnit/sparta_201606/spartaAssistSystem/vendor/bundle/ruby/2.3.0/extensions/x86_64-linux/2.3.0-static/therubyracer-0.12.2/mkmf.log
+
+current directory: /home/taikifnit/sparta_201606/spartaAssistSystem/vendor/bundle/ruby/2.3.0/gems/therubyracer-0.12.2/ext/v8
+make "DESTDIR=" clean
+
+current directory: /home/taikifnit/sparta_201606/spartaAssistSystem/vendor/bundle/ruby/2.3.0/gems/therubyracer-0.12.2/ext/v8
+make "DESTDIR="
+compiling constraints.cc
+compiling init.cc
+compiling object.cc
+compiling value.cc
+compiling backref.cc
+compiling script.cc
+compiling message.cc
+compiling handles.cc
+compiling function.cc
+compiling locker.cc
+compiling string.cc
+compiling signature.cc
+compiling primitive.cc
+compiling heap.cc
+compiling gc.cc
+compiling constants.cc
+compiling stack.cc
+compiling rr.cc
+compiling array.cc
+compiling invocation.cc
+compiling trycatch.cc
+compiling exception.cc
+compiling external.cc
+compiling v8.cc
+compiling template.cc
+compiling accessor.cc
+compiling date.cc
+compiling context.cc
+linking shared-object v8/init.so
+
+current directory: /home/taikifnit/sparta_201606/spartaAssistSystem/vendor/bundle/ruby/2.3.0/gems/therubyracer-0.12.2/ext/v8
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 init.so ./.gem.20160710-18102-76sb2p/v8

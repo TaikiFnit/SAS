@@ -1,0 +1,19 @@
+current directory: /home/taikifnit/sparta_201606/spartaAssistSystem/vendor/bundle/ruby/2.3.0/gems/bcrypt-3.1.11/ext/mri
+/home/taikifnit/.rbenv/versions/2.3.0/bin/ruby -r ./siteconf20160710-4479-139q9ey.rb extconf.rb
+creating Makefile
+
+current directory: /home/taikifnit/sparta_201606/spartaAssistSystem/vendor/bundle/ruby/2.3.0/gems/bcrypt-3.1.11/ext/mri
+make "DESTDIR=" clean
+
+current directory: /home/taikifnit/sparta_201606/spartaAssistSystem/vendor/bundle/ruby/2.3.0/gems/bcrypt-3.1.11/ext/mri
+make "DESTDIR="
+compiling crypt_blowfish.c
+compiling wrapper.c
+compiling crypt.c
+compiling crypt_gensalt.c
+compiling bcrypt_ext.c
+linking shared-object bcrypt_ext.so
+
+current directory: /home/taikifnit/sparta_201606/spartaAssistSystem/vendor/bundle/ruby/2.3.0/gems/bcrypt-3.1.11/ext/mri
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bcrypt_ext.so ./.gem.20160710-4479-1fzccox

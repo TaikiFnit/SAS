@@ -1,0 +1,3 @@
+// <%= config[:theme_info] %>
+// Bootswatch
+// bootswatch.js

@@ -1,0 +1,10 @@
+// <%= config[:theme_info] %>
+// Bootswatch
+// loader.js
+
+<%
+js_files = %w[transition alert button carousel collapse dropdown modal tooltip popover scrollspy tab affix]
+
+js_files.each do |js_file|
+%>//= require twitter/bootstrap/<%= js_file %>
+<% end %>

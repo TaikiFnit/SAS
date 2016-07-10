@@ -1,0 +1,6 @@
+/* <%= config[:theme_info] %>
+ * Bootswatch
+ *= require_self
+ *= require <%= config[:theme_name] %>/loader
+ *= require <%= config[:theme_name] %>/bootswatch
+*/
