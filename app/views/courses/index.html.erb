@@ -1,14 +1,5 @@
 
-<h3>Would you Join?</h3>
-<%= link_to 'Join Form', new_join_path %>
-
-<div class="row">
- <div class="col-sm-2" style="border:1px solid #eee;">
-    <h3>Your Courses</h3>
-    <ul>
-      <% current_user.courses.each do |course| %>
-        <li><%= link_to course.name, course %></li>
-      <% end %>
-    </ul>
-  </div>
-</div>
+  <section class="course-index">
+    <h3>Would you Join?</h3>
+    <%= render template: 'joins/new' %>
+  </section>
