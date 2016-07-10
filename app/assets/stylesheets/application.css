@@ -12,6 +12,8 @@
  *
  *
  *= require_self
+ *= require paper/loader
+ *= require paper/bootswatch
  */
 
 .comment-form {
