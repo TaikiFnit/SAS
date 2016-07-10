@@ -6,98 +6,120 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-2" style="border:1px solid #eee;">
-    <h3>Courses</h3>
-    <ul>
-      <% current_user.courses.each do |course| %>
-        <li><%= link_to course.name, course %></li>
-      <% end %>
-    </ul>
-  </div>
 
-  <div class="col-sm-6 col-sm-offset-1" style="border:1px solid #eee; text-align:center">
-    <h3>Communication</h3>
+  <div class="col-sm-9" style="border:1px solid #eee; text-align:center">
 
-    <% @messages.each do |message| %>
-
-      <div class="media">
-        <div class="media-left">
-          <a href="/users/<%= message.user_id %>">
-            <img class="media-object" src="<%= message.user.image_url %>" alt="message.user.name" style="width: 50px; height: 50px;">
-          </a>
-        </div>
-        <div class="media-body">
-          <h4 class="media-heading"><%= message.user.name %></h4>
-          <%= simple_format message.body %>
-          <small><%= link_to '削除', message_path(message.id), method: :delete %></small>
-          <small id="reply-button" data-id="<%= message.id %>">返信</small>
-          <% if message.attr then %>
-            <h5>Results</h5>
-
-
-          <li>Yes : <%= @votes[message.id][1].count %></li>
-          <li>No : <%= @votes[message.id][0].count %></li>
-          <% end %>
-        </div>
+    <div class="panel panel-success row">
+      <div class="panel-heading">
+        <h3 class="panel-title">Communication</h3>
       </div>
+      <div class="panel-body">
 
-      <% # 選択肢がある場合(attr == true)の処理 %>
-      <% if message.attr then %>
-        <%= form_for(@reply, url: { controller: :replies, action: :create}) do |f| %>
+        <% @messages.each do |message| %>
 
-            <%= f.text_field :message_id, type: 'hidden', value: message.id %>
+          <div class="media course-message" style="border: 1px solid #ddd;">
+            <div class="media-left">
+              <a href="/users/<%= message.user_id %>">
+                <img class="media-object" src="<%= message.user.image_url %>" alt="message.user.name" style="width: 50px; height: 50px;">
+             </a>
+          </div>
+          <div class="media-body">
+            <div class="row">
+              <div class="col-sm-11">
+                <a href="/users/<%= message.user_id %>">
+                <h4 class="media-heading"><%= message.user.name %></h4>
+                </a>
+              </div>
+              <div class="col-sm-1">
+                  <i class="glyphicon glyphicon-option-vertical dropdown-toggle" id="messageMenu<%= message.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></i>
 
-            <%= f.radio_button :value, '0' %>
-            <%= f.radio_button :value, '1' %>
+                  <ul class="dropdown-menu" aria-labelledby="messageMenu<%= message.id %>">
+                    <li id="reply-button" data-id="<%= message.id %>"><a href="#">返信</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><%= link_to '削除', message_path(message.id), method: :delete %></li>
+                  </ul>
+              </div>
+            </div>
+            <%= simple_format message.body %>
+            <% if message.attr then %>
+              <h5>Results</h5>
+              <ul>
+                <li>Yes : <%= @votes[message.id][1].count %></li>
+                <li>No : <%= @votes[message.id][0].count %></li>
+              </ul>
+            <% end %>
+          </div>
+          </div>
 
-            <%= f.submit "返信" %>
-        <% end %>
-      <% end %>
-
-      <% message.replies.each do |reply| %>
-        <% if !reply.value %>
-          <li><%= reply.user.name %> : <%= reply.body %> <small><%= link_to '削除', reply_path(reply.id), method: :delete %></small></li>
-        <% end %>
-      <% end %>
-
-      <div class="media" id="reply<%= message.id %>">
-        <div class="media-left">
-          <img class="media-object" src="<%= current_user.image_url %>" alt="current_user.name" style="width: 50px; height: 50px;">
-        </div>
-        <div class="media-body">
-          <h4 class="media-heading"><%= current_user.name %></h4>
-          <%= form_for(@reply, url: { controller: :replies, action: :create}) do |f| %>
-            <%= f.text_area :body %>
-            <%= f.text_field :message_id, type: 'hidden', value: message.id %>
-
-            <%= f.submit "返信" %>
+          <% # 選択肢がある場合(attr == true)の処理 %>
+          <% if message.attr then %>
+            <%= form_for(@reply, url: { controller: :replies, action: :create}) do |f| %>
+              <%= f.text_field :message_id, type: 'hidden', value: message.id %>
+              <%= f.radio_button :value, '0' %>
+              <%= f.radio_button :value, '1' %>
+              <%= f.submit "返信" %>
+            <% end %>
           <% end %>
+
+          <% message.replies.each do |reply| %>
+            <% if !reply.value %>
+              <li><%= reply.user.name %> : <%= reply.body %> <small><%= link_to '削除', reply_path(reply.id), method: :delete %></small></li>
+            <% end %>
+          <% end %>
+
+          <div class="media" id="reply<%= message.id %>">
+            <div class="media-left">
+              <img class="media-object" src="<%= current_user.image_url %>" alt="current_user.name" style="width: 50px; height: 50px;">
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading"><%= current_user.name %></h4>
+                <%= form_for(@reply, url: { controller: :replies, action: :create}) do |f| %>
+                  <%= f.text_area :body %>
+                  <%= f.text_field :message_id, type: 'hidden', value: message.id %>
+                  <%= f.submit "返信" %>
+                <% end %>
+              </div>
+             </div>
+         <% end %>
+      </div><!-- end panel-body -->
+    </div><!-- end panel -->
+  </div><!-- col-sm-8-->
+
+  <div class="col-sm-2 col-sm-offset-1" style="border:1px solid #eee;">
+    <div class="panel panel-info row">
+        <div class="panel-heading">
+          <h3 class="panel-title">Members</h3>
+        </div>
+        <div class="panel-body">
+          <ul>
+            <% @course.users.each do |user| %>
+              <li><%= link_to user.name, user %></li>
+            <% end %>
+          </ul>
+        </div>
+    </div>
+  </div>
+</div>
+
+<footer class="comment-form">
+    <%= form_for(@message, url: { controller: :messages, action: :create}) do |f|  %>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-1">
+          <%= f.text_field :body, class: 'form-control white' %>
+        </div>
+        <div class="col-sm-2" id="toggle-button">
+          <%= f.check_box 'attr' %>
+        </div>
+        <%= f.text_field :course_id, value: @course.id, type: 'hidden' %>
+        <div class="col-sm-1">
+          <%= f.submit "Send!" , class: 'btn btn-info'%>
         </div>
       </div>
     <% end %>
-  </div>
-
-  <div class="col-sm-2 col-sm-offset-1" style="border:1px solid #eee;">
-    <h3>members</h3>
-    <ul>
-      <% @course.users.each do |user| %>
-        <li><%= link_to user.name, user %></li>
-      <% end %>
-    </ul>
-  </div>
-</div>
-
-<div class="comment-form">
-  <%= form_for(@message, url: { controller: :messages, action: :create}) do |f|  %>
-    <%= f.text_field :body %>
-    <%= f.check_box 'attr' %>
-    <%= f.text_field :course_id, value: @course.id, type: 'hidden' %>
-    <%= f.submit "Send!" %>
-  <% end %>
-</div>
+</footer>
 
 <script>
-$.get('http://qiita.com/sparta-hachiman/private/ee5cfe3a8e9dab4cba7f', function(data) {
-  console.log(data);
-});
+  $("[name='message[attr]']").bootstrapSwitch();
+  $("[name='message[attr]']").bootstrapSwitch('onText', 'Vote!');
+  $("[name='message[attr]']").bootstrapSwitch('offText', 'Plain');
 </script>

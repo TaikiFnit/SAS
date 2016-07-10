@@ -1,10 +1,30 @@
 
 <%= form_for @course do |f| %>
+  <fieldset>
 
-  <%= f.text_field :name %>
-  <%= f.number_field :permission %>
-  <%= f.text_field :resume %>
+    <div class="form-group">
+      <%= f.label :name, class: "col-lg-2 control-label" %>
+      <div class="col-lg-10">
+        <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder: 'Course Name '%>
+      </div>
+    </div>
 
-<%= f.submit "submit" %>
+    <div class="form-group">
+      <%= f.label :name, class: "col-lg-2 control-label" %>
+      <div class="col-lg-10">
+        <%= f.number_field :permission, class: 'form-control', placeholder: 'Permission '%>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :resume, class: "col-lg-2 control-label" %>
+      <div class="col-lg-10">
+        <%= f.text_field :resume, class: 'form-control', placeholder: 'Resume URL'  %>
+      </div>
+    </div>
+  </fieldset>
+
+  <%= f.submit "Create", class: 'btn btn-primary' %>
 
 <% end %>
+

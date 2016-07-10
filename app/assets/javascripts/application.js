@@ -15,5 +15,6 @@
 //= require turbolinks
 //= require paper/loader
 //= require paper/bootswatch
+//= require bootstrap-switch
 
 

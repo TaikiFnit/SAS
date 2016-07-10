@@ -14,20 +14,78 @@
  *= require_self
  *= require paper/loader
  *= require paper/bootswatch
+ *= require bootstrap-switch
  */
 
 /* Course画面のbottom */
-.comment-form {
+
+html, body {
+  width : 100%;
+  margin-top: 120px;
+}
+
+form  .btn {
   width: 100%;
-  position: fixed;
-  bottom: 10px;
+}
+
+section.devise.devise-index h2 {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+section.devise .panel-body {
+  background: #F9F9F9;
+}
+
+.form-group {
+  margin-bottom: 60px !important;
 }
 
 section.course-index {
-  margin-top: 120px;
   text-align: center;
 }
 
 section.course-index h3 {
   padding-bottom: 60px;
+}
+
+.course-message {
+  text-align: left;
+  padding: 10px;
+}
+.panel-body {
+  z-index: 0
+}
+
+.course-message h4.media-heading {
+  font-size: 18px;
+  color: #2196f3
+}
+
+div.media.course-message, div.media.course-message .media-body {
+  overflow:visible;
+}
+
+.comment-form {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #26A69A;
+}
+
+.comment-form input {
+  margin: 5px;
+}
+
+.comment-form .white {
+  background: #eee;
+}
+
+#toggle-button > div:first-child {
+  display: none;
+}
+
+#toggle-button > div {
+  margin: 5px;
 }

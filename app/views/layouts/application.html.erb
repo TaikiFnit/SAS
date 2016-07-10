@@ -28,31 +28,33 @@
           </button>
           <a class="navbar-brand" href="/">SAS</a>
         </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Courses <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li class="dropdown-header">Your courses.</li>
-                  <% current_user.courses.each do |course| %>
-                    <li><%= link_to course.name, course %></li>
-                  <% end %>
-                <li class="divider"></li>
-                <li class="dropdown-header">Create new course?</li>
-                <li><%= link_to 'new course', new_course_path  %></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><%= link_to 'You Profile', user_path(current_user) %></li>
-                <li class="divider"></li>
-                <li><%= link_to 'Logout', destroy_user_session_path, method: :delete  %></li>
-              </ul>
-            </li>
-            <li><a href="/users/<%= current_user.id %>">Signed in as <%= current_user.email %></a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
+        <% if user_signed_in? then %>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+               <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Courses <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-header">Your courses.</li>
+                    <% current_user.courses.each do |course| %>
+                      <li><%= link_to course.name, course %></li>
+                    <% end %>
+                  <li class="divider"></li>
+                  <li class="dropdown-header">Create new course?</li>
+                  <li><%= link_to 'new course', new_course_path  %></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to 'You Profile', user_path(current_user) %></li>
+                  <li class="divider"></li>
+                  <li><%= link_to 'Logout', destroy_user_session_path, method: :delete  %></li>
+                </ul>
+              </li>
+              <li><a href="/users/<%= current_user.id %>">Signed in as <%= current_user.email %></a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        <% end %>
       </div>
     </div>
 
