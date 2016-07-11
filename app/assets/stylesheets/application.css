@@ -104,6 +104,10 @@ div.media.course-message, div.media.course-message .media-body {
   background: #eee;
 }
 
+.members .media-left {
+  padding: 0;
+}
+
 #toggle-button > div:first-child {
   display: none;
 }
