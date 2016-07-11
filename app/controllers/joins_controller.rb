@@ -15,8 +15,13 @@ class JoinsController < ApplicationController
     @join = Join.new(data)
     @join.save
 
-    @user_course = UserCourse.new(data)
-    @user_course.save
+    result = UserCourse.where(['user_id = ? and course_id = ?', data[:user_id], data[:course_id]])
+
+    # 重複して参加しないようにする処理
+    if(result.count == 0) then
+      @user_course = UserCourse.new(data)
+      @user_course.save
+    end
 
     redirect_to course_path(data[:course_id])
   end
